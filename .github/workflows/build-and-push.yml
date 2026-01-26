@@ -110,7 +110,7 @@ jobs:
   build-and-push-images:
     continue-on-error: false
     ## old runs-on: ubuntu-latest
-    runs-on: oracle-vm-16cpu-64gb-x86-64
+    runs-on: jtu-kfp-build-e5-vm
     permissions:
       contents: read
       packages: write
