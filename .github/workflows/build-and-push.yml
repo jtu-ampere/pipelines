@@ -109,8 +109,8 @@ env:
 jobs:
   build-and-push-images:
     continue-on-error: false
-    runs-on: ubuntu-latest
-    ## new ## runs-on: [self-hosted, jtu-kfp-build-e5-vm]
+    ## runs-on: ubuntu-latest
+    runs-on: self-hosted ## jtu-kfp-build-e5-vm
     permissions:
       contents: read
       packages: write
