@@ -110,7 +110,7 @@ jobs:
   build-and-push-images:
     continue-on-error: false
     ## old runs-on: ubuntu-latest
-    runs-on: jtu-kfp-build-e5-vm
+    runs-on: [self-hosted, jtu-kfp-build-e5-vm]
     permissions:
       contents: read
       packages: write
