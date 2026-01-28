@@ -135,6 +135,9 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          builder: oci-multiarch-builder # <<< IMPORTANT: Specify the name of your pre-existing builder
+          use: true                      # This is the default, but explicitly setting it ensures the action sets this builder as the current one for subsequent commands.
 
       - name: Check if image tag already exists
         id: check_tag
