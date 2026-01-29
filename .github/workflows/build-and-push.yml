@@ -39,6 +39,10 @@ on:
         type: string
         description: 'Provide the docker file name'
         required: true
+      platforms:
+        type: string
+        required: true
+        description: e.g, linux/amd64
       push:
         type: boolean
         default: false
@@ -91,6 +95,11 @@ on:
         default: ''
         description: 'Provide the docker file name'
         required: true
+      platforms:
+        type: string
+        default: ''
+        required: true
+        description: 'Provide the target architecture e.g, linux/amd64, linux/arm64'
       push:
         type: boolean
         default: false
@@ -110,7 +119,7 @@ jobs:
   build-and-push-images:
     continue-on-error: false
     ## runs-on: ubuntu-latest
-    runs-on: jtu-kfp-amd64 ##self-hosted 
+    runs-on: [self-hosted, linux, jtu-kfp-amd64] 
     permissions:
       contents: read
       packages: write
@@ -130,15 +139,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Use QEMU with the Docker Setup QEMU action for buildx.
-      ## - name: Set up QEMU
-      ##   uses: docker/setup-qemu-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        ##with:
-        ##  builder: oci-multiarch-builder # <<< IMPORTANT: Specify the name of your pre-existing builder
-        ##  use: true                      # This is the default, but explicitly setting it ensures the action sets this builder as the current one for subsequent commands.
-
+        
       - name: Check if image tag already exists
         id: check_tag
         env:
@@ -180,7 +186,7 @@ jobs:
         uses: docker/build-push-action@v6
         if: steps.check_tag.outcome == 'success'
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ inputs.platforms }}
           context: ${{ inputs.image_context }}
           file: ${{ inputs.docker_file }}
           push: ${{ inputs.push }}
