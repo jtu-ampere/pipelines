@@ -119,7 +119,8 @@ jobs:
   build-and-push-images:
     continue-on-error: false
     ## runs-on: ubuntu-latest
-    runs-on: [self-hosted, linux, jtu-kfp-amd64] 
+    ##runs-on: [self-hosted, linux, jtu-kfp-amd64] 
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
