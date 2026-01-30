@@ -114,7 +114,7 @@ env:
   SET_LATEST: ${{ inputs.set_latest }}
   ADD_SHA_TAG: ${{ inputs.add_sha_tag }}
   CACHE_PATH: '/tmp/.buildx-cache'
-  BUILDX_BUILDER: 'oci-multiarch-builder'
+## BUILDX_BUILDER: 'oci-multiarch-builder'
 
 jobs:
   build-and-push-images:
