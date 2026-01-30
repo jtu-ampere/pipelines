@@ -42,7 +42,7 @@ on:
       platforms:
         type: string
         required: true
-        description: e.g, linux/amd64
+        description: e.g, linux/amd64 or linux/arm64
       push:
         type: boolean
         default: false
@@ -114,6 +114,7 @@ env:
   SET_LATEST: ${{ inputs.set_latest }}
   ADD_SHA_TAG: ${{ inputs.add_sha_tag }}
   CACHE_PATH: '/tmp/.buildx-cache'
+  BUILDX_BUILDER: 'oci-multiarch-builder'
 
 jobs:
   build-and-push-images:
@@ -146,8 +147,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          driver-opts: image=moby/buildkit:buildx-stable-1
-          endpoint: ssh://ubuntu@jtu-kfp-build-a1-vm
+          driver-opts: image=moby/buildkit:v0.11.0
           buildkitd-flags: --debug
 
       - name: Check if image tag already exists
