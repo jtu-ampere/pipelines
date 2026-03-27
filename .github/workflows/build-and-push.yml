@@ -185,7 +185,7 @@ jobs:
           else
             echo "No tag conflict, safe to push."
           fi
-          
+
       # This step uses docker/metadata-action to extract tags and labels
       # that will be applied to the specified image. The id "meta" allows
       # the output of this step to be referenced in a subsequent step.
