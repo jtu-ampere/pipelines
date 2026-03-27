@@ -185,6 +185,7 @@ jobs:
           else
             echo "No tag conflict, safe to push."
           fi
+          
       # This step uses docker/metadata-action to extract tags and labels
       # that will be applied to the specified image. The id "meta" allows
       # the output of this step to be referenced in a subsequent step.
@@ -199,6 +200,7 @@ jobs:
             type=raw,value=${{env.TARGET_IMAGE_TAG}}
             type=raw,value=latest,enable=${{ env.SET_LATEST == 'true'}}
             type=sha,enable=${{ env.ADD_SHA_TAG == 'true' }}
+
       # Build the image. If the build succeeds, it pushes the image to GitHub
       # Packages. It uses the context parameter to define the build's context
       # as the set of files located in the specified path.
