@@ -106,6 +106,6 @@ jobs:
     with:
       target_tag: master
       app_to_build: ${{ matrix.component.image }}
-      set_latest: "false"
-      add_sha_tag: "false"
+      set_latest: False
+      add_sha_tag: False
       
